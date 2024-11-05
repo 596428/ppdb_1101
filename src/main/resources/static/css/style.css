@@ -1,0 +1,839 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 1rem;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0;
+}
+
+.auth-button {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.lang-switch {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.lang-switch.active {
+    background-color: #fff;
+    color: #333;
+}
+
+
+main {
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#search-input {
+    padding: 0.5rem;
+    width: 50%;
+    max-width: 300px;
+}
+
+#search-button, .size-buttons button {
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+}
+
+.card-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.size-small .card-item img {
+    max-width: 150px;
+}
+
+.size-medium .card-item img {
+    max-width: 200px;
+}
+
+.size-large .card-item img {
+    max-width: 250px;
+}
+
+footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: nowrap;
+        padding: 0.5rem;
+    }
+
+    nav .nav-left {
+        flex-grow: 1;
+    }
+
+    nav .nav-right {
+        flex-shrink: 0;
+    }
+
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+
+    .auth-button, .lang-switch {
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    /* nav ul, .auth-buttons {
+        margin-bottom: 0.5rem;
+    } */
+    #search-input, #search-button, .size-buttons {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    /* Responsive design for builder page */
+    #builder-container {
+        flex-direction: column;
+    }
+
+    #deckList, #cardList {
+        flex: 1;
+        width: 100%;
+    }
+    #deck-stacked-view {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    .modal-layout {
+        flex-direction: column;
+    }
+
+    .card-image {
+        max-width: 100%;
+    }
+    #toolbar_buttons {
+        padding: 0.3rem;
+        gap: 0.3rem;
+    }
+
+    #toolbar_buttons button {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.7rem;
+        /* 모바일에서의 높이 명시적 지정 */
+        min-height: 28px;
+        max-height: 32px;
+    }
+/* 
+    .stacked-card {
+        width: 80px;
+        height: 112px;
+    } */
+}
+
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-layout {
+    display: flex;
+    gap: 20px;
+}
+
+/* 모달창 css card-image, card-image ing, card-details */
+.card-image {
+    flex: 1;
+    max-width: 300px;
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+}
+
+.card-details {
+    flex: 2;
+}
+
+/* .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} */
+.close {
+    color: #aaa;
+    align-self: flex-end;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.energy-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin: 0 2px;
+}
+
+
+/* 기존 버튼 스타일에 disabled 상태 추가 */
+button:disabled {
+    opacity: 0.5;  /* 투명도를 줄여서 흐리게 표시 */
+    cursor: not-allowed;  /* 클릭할 수 없음을 나타내는 커서 */
+    background-color: #a0a0a0;  /* 비활성화 상태의 배경색 */
+    color: #666666;  /* 비활성화 상태의 텍스트 색상 */
+}
+
+/* Copy to Clipboard 버튼 특정 스타일 */
+#copy-clipboard:disabled {
+    background-color: #a0a0a0;  /* 더 밝은 회색 배경 */
+    border-color: #cccccc;  /* 테두리 색상 변경 */
+    pointer-events: none;  /* 모든 마우스 이벤트 무시 */
+    box-shadow: none;  /* 비활성화 상태에서는 그림자 효과 제거 */
+}
+
+/* 호버 효과 방지 */
+button:disabled:hover {
+    background-color: #cccccc;  /* 호버 상태에서도 같은 배경색 유지 */
+    cursor: not-allowed;  /* 호버 상태에서도 not-allowed 커서 유지 */
+}
+
+#builder-container {
+    display: flex;
+    gap: 1rem;
+}
+
+#deckList {
+    flex: 6.5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    min-height: 400px;
+    overflow-y: auto;
+}
+
+#cardList {
+    flex: 3.5;
+}
+
+.deck-card-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.card-controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    margin: 0 0.25rem;
+    cursor: pointer;
+}
+
+.card-controls button:hover {
+    background-color: #0056b3;
+}
+
+.card-count {
+    font-weight: bold;
+    margin: 0 0.5rem;
+}
+
+/* Smaller card size for x-small */
+.size-x-small .card-item img {
+    max-width: 75px; /* 75% of the previous small size (150px) */
+}
+
+/* Drag and drop styles */
+.card-item {
+    cursor: grab;
+}
+
+.card-item:active {
+    cursor: grabbing;
+}
+
+#deckList.dragover {
+    background-color: #e9ecef;
+    border: 2px dashed #007bff;
+}
+
+   /* Toolbar buttons update */
+   /* #toolbar_buttons button {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    height: auto;
+    min-height: unset;
+} */
+
+/* #toolbar_buttons button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+} */
+
+/* 덱빌더 페이지를 위한 내용 추가 */
+/* Deck Builder specific styles */
+#toolbar_buttons {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+#toolbar_buttons button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#toolbar_buttons button:hover {
+    background-color: #0056b3;
+}
+
+#builder-container {
+    display: flex;
+    gap: 1rem;
+}
+
+#deckList {
+    flex: 6.5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    min-height: 400px;
+    overflow-y: auto;
+}
+
+#cardList {
+    flex: 3.5;
+}
+
+.deck-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.deck-view {
+    display: none;
+}
+
+.deck-view.active {
+    display: block;
+}
+
+/* Stacked View Styles */
+#deck-stacked-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.stacked-row {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.stacked-card {
+    position: relative;
+    width: 130px; /* Fixed width */
+    height: 182px; /* Fixed height */
+    flex: 0 0 auto;
+    overflow: hidden;
+}
+
+.stacked-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.stacked-card .card-count {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+}
+
+/* Text View Styles */
+#deck-text-view {
+    padding: 10px;
+}
+
+.deck-card-item {
+    margin-bottom: 5px;
+}
+
+/* Card List Styles */
+.card-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.card-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.card-controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    margin: 0 0.25rem;
+    cursor: pointer;
+}
+
+.card-controls button:hover {
+    background-color: #0056b3;
+}
+
+
+#deck-name {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#filter-button {
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#filter-button:hover {
+    background-color: #e0e0e0;
+}
+
+.click-area {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    cursor: pointer;
+}
+
+.click-area.left {
+    left: 0;
+}
+
+.click-area.right {
+    right: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.icon {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.click-area:hover .overlay {
+    opacity: 1;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#user-id {
+    color: #fff;
+    font-weight: 500;
+}
+
+#logout-button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.validation-message {
+    display: none;
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.form-group input.invalid {
+    border-color: #dc3545;
+}
+
+/* 덱 정보 입력 영역 스타일 */
+.deck-info-container {
+    margin-top: 20px;
+    padding: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.deck-name-container {
+    margin-bottom: 15px;
+}
+
+.deck-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.visibility-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.deck-thumbnail-container {
+    margin-bottom: 15px;
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.thumbnail-item {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.thumbnail-item.selected {
+    border-color: #007bff;
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: auto;
+}
+
+.thumbnail-help {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.deck-description {
+    margin-bottom: 15px;
+}
+
+.ck-editor__editable {
+    min-height: 200px;
+}
+
+.save-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+/* 드래그 중인 카드 스타일 */
+/* .card-item.dragging {
+    opacity: 0.6;
+    cursor: grabbing;
+} */
+
+/* 드래그 중일 때 덱리스트 하이라이트 */
+.drag-highlight {
+    border: 2px dashed #007bff !important;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* 드래그한 아이템이 덱리스트 위에 있을 때 */
+.drag-over {
+    border: 3px solid #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+/* 드롭 성공 시 애니메이션 효과 */
+.drop-feedback {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #28a745;
+    pointer-events: none;
+    animation: dropFeedback 0.5s ease-out forwards;
+    z-index: 1000;
+}
+
+@keyframes dropFeedback {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.drop-feedback.error {
+    background: #dc3545;
+    animation: errorFeedback 0.5s ease-out forwards;
+}
+
+@keyframes errorFeedback {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+/* 드래그 가능한 아이템 표시 */
+[draggable="true"] {
+    cursor: grab;
+}
+
+[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.card-name {
+    cursor: zoom-in;  /* 돋보기 모양 (확대) */
+}
+
+.card-name:hover {
+    color: #2962ff;
+    font-weight: bold;
+}

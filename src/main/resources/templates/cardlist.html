@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Pocket Deck Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/filter-style.css}">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Pokemon Pocket Deck Builder</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <!-- <li><a href="/deckList">Decks</a></li> -->
+            <li><a href="/">Builder</a></li>
+            <li><a href="/cardlist">Card</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-switch" data-lang="KR">KR</button>
+            <button class="lang-switch" data-lang="EN">EN</button>
+        </div>
+        <!-- <div class="auth-buttons">
+            <button>Login</button>
+            <button>Sign Up</button>
+        </div> -->
+    </nav>
+    
+    <main>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search cards by name...">  
+            <!-- <div class="size-buttons">
+                <button id="size-decrease">-</button>
+                <button id="size-increase">+</button>
+            </div> -->
+            <button id="filter-button" data-translate="filter">필터</button>
+        </div>
+        <div id="filter-container"></div>
+        
+        
+        <div id="card-gallery" class="card-gallery size-medium"></div>
+        
+    </main>
+    
+    <footer>
+        <p>All Pokémon card images, names, and related marks are trademarks and © of Nintendo, Creatures, Game Freak, and The Pokémon Company. All rights reserved. 1996-2024</p>
+        <p>Privacy Policy</p>
+        <p>ttyr659@gmail.com</p>
+    </footer>
+    <script th:src="@{/js/languageSwitcher.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/filter.js}"></script>
+</body>
+</html>
