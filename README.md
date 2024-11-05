@@ -2,7 +2,7 @@
 
 # Portfolio Project
 
-[바로가기](https://ppocket.site)
+<span style="font-size: 1.5em; font-weight: bold;">[<a href="https://ppocket.site">바로가기</a>]</span>
 
 ## 1. 데이터 수집 및 DB 구축
 - **데이터 수집**: Python을 사용하여 해외 영문 사이트에서 카드 정보 및 이미지를 크롤링하였습니다.
